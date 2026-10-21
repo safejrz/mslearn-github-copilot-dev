@@ -1,5 +1,8 @@
 NAVIGATION WIREFRAME
 
+The navigation stays in a sidebar to the left of the page content at every
+viewport width. It never moves above the content.
+
 Expanded (viewport width >= 600 CSS pixels)
 +--------------------------+
 | Fruit Shop               |
@@ -15,16 +18,14 @@ Expanded (viewport width >= 600 CSS pixels)
 +--------------------------+
 
 Collapsed (viewport width < 600 CSS pixels)
-+-----+
-| FS  |
-|     |
-| [P] |  Products
-| [D] |  Product Details
-| [C] |  Shopping Cart
-| [O] |  Checkout
-+-----+
-| Main page content        |
-+--------------------------+
++----+---------------------+
+| FS | Main page content   |
+|    |                     |
+| P  |                     |
+| D  |                     |
+| C  |                     |
+| O  |                     |
++----+---------------------+
 
 Notes:
 - Each navigation item is a link and stays operable in both layouts.

@@ -564,47 +564,6 @@ input:focus-visible {
 }
 
 @media (max-width: 640px) {
-  .sidebar {
-    position: static;
-    width: 100%;
-    padding: 12px 16px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .brand {
-    margin: 0 0 12px;
-  }
-
-  .brand-mark {
-    width: 32px;
-    height: 32px;
-  }
-
-  .primary-nav {
-    display: flex;
-    gap: 5px;
-    overflow-x: auto;
-  }
-
-  .nav-link {
-    min-height: 38px;
-    flex: 0 0 auto;
-    padding-inline: 11px;
-    font-size: 0.82rem;
-  }
-
-  .sidebar-note {
-    display: none;
-  }
-
-  .main-content {
-    width: 100%;
-    min-height: auto;
-    margin-left: 0;
-    padding: 28px 18px 42px;
-  }
-
   .detail-layout {
     grid-template-columns: 1fr;
   }
@@ -616,35 +575,39 @@ input:focus-visible {
 
 @media (max-width: 599px) {
   .sidebar {
-    padding: 10px 8px;
+    width: 60px;
+    padding: 10px 5px;
   }
 
   .brand {
-    gap: 8px;
-    margin-bottom: 9px;
-    font-size: 0.95rem;
+    justify-content: center;
+    margin: 0 0 16px;
+  }
+
+  .brand-name {
+    display: none;
   }
 
   .brand-mark {
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
     border-radius: 9px;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
   }
 
   .primary-nav {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 4px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
     overflow: visible;
   }
 
   .nav-link {
     min-width: 0;
-    min-height: 38px;
+    min-height: 42px;
     justify-content: center;
     padding: 0;
-    font-size: 0.78rem;
+    font-size: 0.85rem;
   }
 
   .nav-full {
@@ -656,7 +619,9 @@ input:focus-visible {
   }
 
   .main-content {
-    padding: 24px 12px 32px;
+    width: calc(100% - 60px);
+    margin-left: 60px;
+    padding: 24px 10px 32px;
   }
 
   .product-card {
