@@ -69,7 +69,7 @@ Online shoppers interested in browsing and ordering fruit.
 
 Provide a left-side navigation menu with links to **Products**, **ProductDetails**, **ShoppingCart**, and **Checkout**. Shoppers must also be able to open ProductDetails by selecting a product on Products.
 
-At viewport widths below 300 CSS pixels, collapse the navigation labels to one- or two-letter abbreviations (for example, P, D, C, and O). Keep every link operable and provide accessible names so the abbreviated controls remain understandable to assistive technology.
+At viewport widths below 600 CSS pixels, collapse the navigation labels to one- or two-letter abbreviations (for example, P, D, C, and O). Keep every link operable and provide accessible names so the abbreviated controls remain understandable to assistive technology.
 
 ## 7. Sample Data
 
@@ -95,7 +95,7 @@ Use this sample catalog. Prices are illustrative and in USD.
 3. **Update or remove cart items:** A shopper changes an item's quantity or removes it. The displayed line total and cart total update accordingly. A quantity of zero removes the item; invalid or negative quantities are not accepted.
 4. **Review checkout:** A shopper proceeds to Checkout and sees the same items, quantities, and total as in the cart.
 5. **Simulate an order:** Selecting **Process Order** displays an order confirmation, clears the cart, and does not request payment details.
-6. **Navigate between pages:** The navigation menu takes the shopper to each page. Selecting a product opens its details, and the navigation labels collapse to abbreviations below 300 CSS pixels.
+6. **Navigate between pages:** The navigation menu takes the shopper to each page. Selecting a product opens its details, and the navigation labels collapse to abbreviations below 600 CSS pixels.
 
 ## 9. Technical Requirements
 
@@ -112,7 +112,7 @@ Use this sample catalog. Prices are illustrative and in USD.
 - Use basic, clean styling that makes product information and actions easy to understand.
 - Support desktop and phone-sized screens with a layout that adapts to available width.
 - The app does not need fully polished responsive behavior, but content and controls should remain usable on small screens.
-- Keep the navigation on the left at wider widths. At widths below 300 CSS pixels, show only the specified abbreviations.
+- Keep the navigation on the left at wider widths. At widths below 600 CSS pixels, show only the specified abbreviations.
 - Use the accompanying text wireframes as low-fidelity layout guidance; exact colors, fonts, and decorative details are left to implementation.
 
 ## 11. Prototype Assumptions

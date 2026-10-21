@@ -1,6 +1,6 @@
 NAVIGATION WIREFRAME
 
-Expanded (viewport width >= 300 CSS pixels)
+Expanded (viewport width >= 600 CSS pixels)
 +--------------------------+
 | Fruit Shop               |
 |                          |
@@ -14,7 +14,7 @@ Expanded (viewport width >= 300 CSS pixels)
 | Main page content        |
 +--------------------------+
 
-Collapsed (viewport width < 300 CSS pixels)
+Collapsed (viewport width < 600 CSS pixels)
 +-----+
 | FS  |
 |     |
