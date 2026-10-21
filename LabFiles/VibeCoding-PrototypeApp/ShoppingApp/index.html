@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8f2">
+    <title>Fruit Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#/products" aria-label="Fruit Shop home">
+          <span class="brand-mark" aria-hidden="true">FS</span>
+          <span class="brand-name">Fruit Shop</span>
+        </a>
+        <nav class="primary-nav" aria-label="Main navigation">
+          <a class="nav-link" href="#/products" aria-label="Products" data-page="products">
+            <span class="nav-short" aria-hidden="true">P</span>
+            <span class="nav-full">Products</span>
+          </a>
+          <a class="nav-link" href="#/product-details" aria-label="Product Details" data-page="product-details">
+            <span class="nav-short" aria-hidden="true">D</span>
+            <span class="nav-full">Product Details</span>
+          </a>
+          <a class="nav-link" href="#/shopping-cart" aria-label="Shopping Cart" data-page="shopping-cart">
+            <span class="nav-short" aria-hidden="true">C</span>
+            <span class="nav-full">Shopping Cart <span class="cart-count" id="cart-count">0</span></span>
+          </a>
+          <a class="nav-link" href="#/checkout" aria-label="Checkout" data-page="checkout">
+            <span class="nav-short" aria-hidden="true">O</span>
+            <span class="nav-full">Checkout</span>
+          </a>
+        </nav>
+        <p class="sidebar-note">Fresh picks, made simple.</p>
+      </aside>
+      <main class="main-content" id="main-content" tabindex="-1">
+        <noscript>This prototype needs JavaScript enabled to display the shop.</noscript>
+      </main>
+    </div>
+  </body>
+</html>
