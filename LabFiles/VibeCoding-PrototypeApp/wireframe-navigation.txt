@@ -1,0 +1,33 @@
+NAVIGATION WIREFRAME
+
+Expanded (viewport width >= 300 CSS pixels)
++--------------------------+
+| Fruit Shop               |
+|                          |
+| [Products]               |
+| [Product Details]        |
+| [Shopping Cart]          |
+| [Checkout]               |
+|                          |
+| Cart items: 0            |
++--------------------------+
+| Main page content        |
++--------------------------+
+
+Collapsed (viewport width < 300 CSS pixels)
++-----+
+| FS  |
+|     |
+| [P] |  Products
+| [D] |  Product Details
+| [C] |  Shopping Cart
+| [O] |  Checkout
++-----+
+| Main page content        |
++--------------------------+
+
+Notes:
+- Each navigation item is a link and stays operable in both layouts.
+- Collapsed links have accessible names matching their full page names.
+- Highlight the link for the current page.
+- FS is the compact app mark; P, D, C, and O abbreviate the page names.

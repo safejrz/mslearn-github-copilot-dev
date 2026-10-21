@@ -1,0 +1,24 @@
+PRODUCTS PAGE WIREFRAME
+
++---------------------+------------------------------------------+
+| Fruit Shop          | Products                                 |
+|                     | Browse our fresh fruit.                 |
+| [Products]          |                                          |
+| [Product Details]   | +------------------+ +------------------+ |
+| [Shopping Cart (0)] | |       🍎         | |       🍌         | |
+| [Checkout]          | | Apples           | | Bananas          | |
+|                     | | $1.20 each       | | $0.60 each       | |
+|                     | | [Details]        | | [Details]        | |
+|                     | | Qty [-] 1 [+]    | | Qty [-] 1 [+]    | |
+|                     | | [Add to Cart]    | | [Add to Cart]    | |
+|                     | +------------------+ +------------------+ |
+|                     |                                          |
+|                     | More product cards ...                   |
++---------------------+------------------------------------------+
+
+Notes:
+- Show all 10 products in a responsive grid or list.
+- Each card shows emoji, product name, unit price, quantity control,
+  Details link/action, and Add to Cart button.
+- Adding a product gives visible confirmation and updates the cart count.
+- At narrow widths, cards stack vertically and remain readable.
