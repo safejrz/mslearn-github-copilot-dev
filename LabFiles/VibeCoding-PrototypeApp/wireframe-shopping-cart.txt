@@ -1,0 +1,30 @@
+SHOPPING CART PAGE WIREFRAME
+
++---------------------+------------------------------------------+
+| Fruit Shop          | Shopping Cart                            |
+|                     |                                          |
+| [Products]          | Product           Qty    Price     Action|
+| [Product Details]   | ---------------------------------------- |
+| [Shopping Cart (3)] | 🍎 Apples          [-] 2 [+] $2.40 [Remove]|
+| [Checkout]          | 🍌 Bananas         [-] 1 [+] $0.60 [Remove]|
+|                     |                                          |
+|                     | Cart total:                    $3.00     |
+|                     |                                          |
+|                     | [Continue Shopping] [Proceed to Checkout]|
++---------------------+------------------------------------------+
+
+Empty cart state:
++---------------------+------------------------------------------+
+| Fruit Shop          | Shopping Cart                            |
+|                     | Your cart is empty.                      |
+| [Products]          | [Browse Products]                       |
+| [Product Details]   |                                          |
+| [Shopping Cart (0)] |                                          |
+| [Checkout]          |                                          |
++---------------------+------------------------------------------+
+
+Notes:
+- Each row shows product, quantity control, calculated line total, and
+  a Remove action.
+- Quantity changes immediately recalculate line and cart totals.
+- Setting quantity to zero removes the item.

@@ -1,0 +1,24 @@
+PRODUCT DETAILS PAGE WIREFRAME
+
++---------------------+------------------------------------------+
+| Fruit Shop          | Product Details                          |
+|                     |                                          |
+| [Products]          | [< Back to Products]                     |
+| [Product Details]   |                                          |
+| [Shopping Cart (2)] | +--------------------------------------+ |
+| [Checkout]          | |                 🍓                   | |
+|                     | | Strawberries                          | |
+|                     | | Sweet, fresh strawberries.            | |
+|                     | | $4.50 per pound                       | |
+|                     | |                                      | |
+|                     | | Quantity: [ - ] 1 [ + ]              | |
+|                     | | [Add to Cart]                         | |
+|                     | +--------------------------------------+ |
++---------------------+------------------------------------------+
+
+Notes:
+- Render details for the product selected from Products.
+- The back link returns to Products.
+- Add to Cart adds the selected quantity and provides confirmation.
+- If no valid product is selected, show a brief message and a link to
+  Products instead of a broken or blank detail view.

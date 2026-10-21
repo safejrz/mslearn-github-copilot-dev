@@ -1,0 +1,34 @@
+NAVIGATION WIREFRAME
+
+The navigation stays in a sidebar to the left of the page content at every
+viewport width. It never moves above the content.
+
+Expanded (viewport width >= 600 CSS pixels)
++--------------------------+
+| Fruit Shop               |
+|                          |
+| [Products]               |
+| [Product Details]        |
+| [Shopping Cart]          |
+| [Checkout]               |
+|                          |
+| Cart items: 0            |
++--------------------------+
+| Main page content        |
++--------------------------+
+
+Collapsed (viewport width < 600 CSS pixels)
++----+---------------------+
+| FS | Main page content   |
+|    |                     |
+| P  |                     |
+| D  |                     |
+| C  |                     |
+| O  |                     |
++----+---------------------+
+
+Notes:
+- Each navigation item is a link and stays operable in both layouts.
+- Collapsed links have accessible names matching their full page names.
+- Highlight the link for the current page.
+- FS is the compact app mark; P, D, C, and O abbreviate the page names.

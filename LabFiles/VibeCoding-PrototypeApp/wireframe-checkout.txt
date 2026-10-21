@@ -1,0 +1,32 @@
+CHECKOUT PAGE WIREFRAME
+
++---------------------+------------------------------------------+
+| Fruit Shop          | Checkout                                |
+|                     |                                          |
+| [Products]          | Order summary                           |
+| [Product Details]   | ---------------------------------------- |
+| [Shopping Cart (3)] | 🍎 Apples          x 2          $2.40    |
+| [Checkout]          | 🍌 Bananas         x 1          $0.60    |
+|                     |                                          |
+|                     | Order total:                   $3.00    |
+|                     |                                          |
+|                     | [Process Order]                         |
++---------------------+------------------------------------------+
+
+Confirmation state:
++---------------------+------------------------------------------+
+| Fruit Shop          | Order Complete                          |
+|                     | Your sample order has been processed.   |
+| [Products]          | No payment was taken.                   |
+| [Product Details]   | [Continue Shopping]                     |
+| [Shopping Cart (0)] |                                          |
+| [Checkout]          |                                          |
++---------------------+------------------------------------------+
+
+Empty cart state:
+- Show that there are no items to check out.
+- Provide a link to Products.
+
+Notes:
+- Checkout is a local simulation, not a payment form.
+- Processing confirms the simulated order and clears the cart.
