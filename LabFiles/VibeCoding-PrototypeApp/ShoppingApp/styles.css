@@ -105,6 +105,15 @@ a {
   background: var(--green-pale);
 }
 
+.nav-emoji {
+  display: inline-block;
+  width: 1.4em;
+  flex: 0 0 auto;
+  font-size: 1.15rem;
+  line-height: 1;
+  text-align: center;
+}
+
 .nav-short {
   display: none;
   font-weight: 800;
@@ -604,10 +613,18 @@ input:focus-visible {
 
   .nav-link {
     min-width: 0;
-    min-height: 42px;
+    min-height: 58px;
+    flex-direction: column;
     justify-content: center;
+    gap: 4px;
     padding: 0;
-    font-size: 0.85rem;
+    font-size: 0.72rem;
+    text-align: center;
+  }
+
+  .nav-emoji {
+    width: 100%;
+    font-size: 1.35rem;
   }
 
   .nav-full {
