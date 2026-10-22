@@ -4,6 +4,8 @@ Use the following PRD and wireframes as the source of truth when creating or cha
 
 Navigation requirement: keep the navigation in a left-side sidebar at every viewport width; never move it above the page content. Below 600 CSS pixels, use a compact vertical sidebar with one- or two-letter abbreviations. Keep all links operable and their full names accessible.
 
+Navigation emoji requirement: show an emoji for each page in the navigation (🍎 Products, 🔍 ProductDetails, 🛒 ShoppingCart, 💳 Checkout). When the navigation is collapsed, center each emoji horizontally in the navigation bar.
+
 ## Product Requirements Document
 
 # Product Requirements Document: Fruit Shopping Prototype
@@ -79,6 +81,8 @@ Provide a left-side navigation menu with links to **Products**, **ProductDetails
 
 At viewport widths below 600 CSS pixels, collapse the navigation labels to one- or two-letter abbreviations (for example, P, D, C, and O), keeping the compact navigation vertically stacked in its left-side position. Keep every link operable and provide accessible names so the abbreviated controls remain understandable to assistive technology.
 
+Display an emoji for each page in the navigation menu: 🍎 Products, 🔍 ProductDetails, 🛒 ShoppingCart, and 💳 Checkout. The emoji appear beside the page names when the navigation is expanded. When the navigation is collapsed, each emoji must be centered horizontally within the navigation bar, with its abbreviation centered beneath it. Mark the emoji as decorative so assistive technology uses the page name instead.
+
 ## 7. Sample Data
 
 Use this sample catalog. Prices are illustrative and in USD.
@@ -120,7 +124,7 @@ Use this sample catalog. Prices are illustrative and in USD.
 - Use basic, clean styling that makes product information and actions easy to understand.
 - Support desktop and phone-sized screens with a layout that adapts to available width.
 - The app does not need fully polished responsive behavior, but content and controls should remain usable on small screens.
-- Keep the navigation on the left at all viewport widths; do not reposition it above the content on phones or other small screens. At widths below 600 CSS pixels, use a compact vertical sidebar and show only the specified abbreviations.
+- Keep the navigation on the left at all viewport widths; do not reposition it above the content on phones or other small screens. At widths below 600 CSS pixels, use a compact vertical sidebar and show only the specified abbreviations, each with its page emoji centered horizontally above it.
 - Use the accompanying text wireframes as low-fidelity layout guidance; exact colors, fonts, and decorative details are left to implementation.
 
 ## 11. Prototype Assumptions
@@ -144,10 +148,10 @@ Expanded (viewport width >= 600 CSS pixels)
 +--------------------------+
 | Fruit Shop               |
 |                          |
-| [Products]               |
-| [Product Details]        |
-| [Shopping Cart]          |
-| [Checkout]               |
+| [🍎 Products]            |
+| [🔍 Product Details]     |
+| [🛒 Shopping Cart]       |
+| [💳 Checkout]            |
 |                          |
 | Cart items: 0            |
 +--------------------------+
@@ -158,14 +162,22 @@ Collapsed (viewport width < 600 CSS pixels)
 +----+---------------------+
 | FS | Main page content   |
 |    |                     |
+| 🍎 |                     |
 | P  |                     |
+| 🔍 |                     |
 | D  |                     |
+| 🛒 |                     |
 | C  |                     |
+| 💳 |                     |
 | O  |                     |
 +----+---------------------+
 
 Notes:
 - Each navigation item is a link and stays operable in both layouts.
+- Each page has an emoji in the navigation: 🍎 Products, 🔍 Product Details,
+  🛒 Shopping Cart, and 💳 Checkout.
+- When collapsed, each emoji is centered horizontally in the navigation bar,
+  with its one-letter abbreviation centered beneath it.
 - Collapsed links have accessible names matching their full page names.
 - Highlight the link for the current page.
 - FS is the compact app mark; P, D, C, and O abbreviate the page names.

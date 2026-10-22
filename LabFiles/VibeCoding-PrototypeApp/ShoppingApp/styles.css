@@ -593,7 +593,8 @@ input:focus-visible {
     margin: 0 0 16px;
   }
 
-  .brand-name {
+  .brand-name,
+  .sidebar-note {
     display: none;
   }
 
