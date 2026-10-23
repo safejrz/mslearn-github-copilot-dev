@@ -16,12 +16,18 @@ CHECKOUT PAGE WIREFRAME
 Confirmation state:
 +---------------------+------------------------------------------+
 | Fruit Shop          | Order Complete                          |
-|                     | Your sample order has been processed.   |
-| [Products]          | No payment was taken.                   |
-| [Product Details]   | [Continue Shopping]                     |
-| [Shopping Cart (0)] |                                          |
-| [Checkout]          |                                          |
-+---------------------+------------------------------------------+
+|                     | ✅ Thank you for your order!            |
+| [Products]          | Order number: FS-1001                   |
+| [Product Details]   | No payment was taken.                   |
+| [Shopping Cart]     | 🍎 Apples     2 x $1.20         $2.40    |
+| [Checkout]          | 🍌 Bananas    1 x $0.60         $0.60    |
+|                     | Order total:                    $3.00    |
+|                     | [Continue Shopping]                     |
+|                     |        +---------------------------------+ |
+|                     |        | Order FS-1001 placed. Thank you!| |
++---------------------+--------+---------------------------------+-+
+(The cart badge is hidden because the cart is now empty. The toast at the
+bottom right fades out automatically.)
 
 Empty cart state:
 - Show that there are no items to check out.
@@ -30,3 +36,8 @@ Empty cart state:
 Notes:
 - Checkout is a local simulation, not a payment form.
 - Processing confirms the simulated order and clears the cart.
+- The confirmation view shows a thank-you message, a sample order number,
+  the ordered items with quantities and line totals, and the order total, so
+  the summary remains visible after the cart is cleared.
+- The confirmation view is shown only until the shopper leaves Checkout or
+  changes the cart.

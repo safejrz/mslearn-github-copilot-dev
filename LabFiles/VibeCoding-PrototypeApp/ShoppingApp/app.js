@@ -17,8 +17,10 @@ const main = document.querySelector("#main-content");
 const cartCount = document.querySelector("#cart-count");
 const cart = new Map();
 const productQuantities = new Map();
-let notice = "";
-let orderCompleted = false;
+const toastRegion = document.querySelector("#toast-region");
+const TOAST_DURATION_MS = 4000;
+let lastOrder = null;
+let orderSequence = 1000;
 
 const money = (cents) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(cents / 100);
@@ -77,9 +79,26 @@ function pageHeader(title, intro, eyebrow = "Fruit Shop") {
     </header>`;
 }
 
-function renderNotice() {
-  if (!notice) return "";
-  return `<p class="notice" role="status">${escapeHtml(notice)}</p>`;
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.setAttribute("role", type === "error" ? "alert" : "status");
+  const text = document.createElement("span");
+  text.textContent = message;
+  const close = document.createElement("button");
+  close.type = "button";
+  close.className = "toast-close";
+  close.setAttribute("aria-label", "Dismiss notification");
+  close.textContent = "×";
+  const dismiss = () => {
+    clearTimeout(timer);
+    toast.remove();
+  };
+  close.addEventListener("click", dismiss);
+  toast.append(text, close);
+  toastRegion.append(toast);
+  const timer = setTimeout(dismiss, TOAST_DURATION_MS);
+  while (toastRegion.children.length > 3) toastRegion.firstElementChild.remove();
 }
 
 function productCard(product) {
@@ -108,7 +127,6 @@ function renderProducts() {
   setActiveNavigation("products");
   main.innerHTML = `
     ${pageHeader("Fresh fruit, picked for you", "Browse the fruit stand and add your favorites to the cart.", "Our produce")}
-    ${renderNotice()}
     <section class="product-grid" aria-label="Fruit products">
       ${products.map(productCard).join("")}
     </section>`;
@@ -131,7 +149,6 @@ function renderProductDetails(productId) {
 
   const quantity = productQuantities.get(product.id) || 1;
   main.innerHTML = `
-    ${renderNotice()}
     <a class="back-link" href="#/products">← Back to Products</a>
     <section class="panel detail-layout">
       <div class="detail-emoji" aria-hidden="true">${product.emoji}</div>
@@ -196,7 +213,6 @@ function renderShoppingCart() {
 
   main.innerHTML = `
     ${pageHeader("Your shopping cart", "Review your fruit and update quantities before checkout.", "Your basket")}
-    ${renderNotice()}
     <section class="panel">
       <div class="cart-table-wrap">
         <table class="cart-table">
@@ -229,13 +245,24 @@ function checkoutRows() {
 
 function renderCheckout() {
   setActiveNavigation("checkout");
-  if (orderCompleted) {
+  if (lastOrder) {
+    const rows = lastOrder.items.map((item) => `
+      <li class="checkout-item">
+        <div class="checkout-item-name">
+          <span aria-hidden="true">${item.emoji}</span>
+          <span>${escapeHtml(item.name)}<span class="checkout-item-detail">${item.quantity} × ${money(item.priceCents)} ${escapeHtml(item.unit)}</span></span>
+        </div>
+        <strong>${money(item.priceCents * item.quantity)}</strong>
+      </li>`).join("");
     main.innerHTML = `
       ${pageHeader("Order complete", "Thanks for trying the Fruit Shop prototype.", "All done")}
-      <section class="confirmation" role="status">
+      <section class="confirmation">
         <div class="confirmation-icon" aria-hidden="true">✅</div>
-        <h2>Your sample order has been processed.</h2>
-        <p>No payment was taken. This was a local prototype demonstration.</p>
+        <h2>Thank you for your order!</h2>
+        <p class="order-number">Order number: <strong>${escapeHtml(lastOrder.id)}</strong></p>
+        <p>Your sample order has been processed. No payment was taken; this was a local prototype demonstration.</p>
+        <ul class="checkout-list confirmation-list">${rows}</ul>
+        <div class="checkout-total"><span>Order total</span><span>${money(lastOrder.totalCents)}</span></div>
         <a class="button" href="#/products">Continue Shopping</a>
       </section>`;
     return;
@@ -254,7 +281,6 @@ function renderCheckout() {
 
   main.innerHTML = `
     ${pageHeader("Checkout", "Review your order before completing your sample checkout.", "Almost there")}
-    ${renderNotice()}
     <section class="panel">
       <h2>Order summary</h2>
       <ul class="checkout-list">${checkoutRows()}</ul>
@@ -263,8 +289,16 @@ function renderCheckout() {
     </section>`;
 }
 
+function updateCartBadge() {
+  const count = itemCount();
+  cartCount.textContent = count > 99 ? "99+" : String(count);
+  cartCount.hidden = count === 0;
+  const link = cartCount.closest(".nav-link");
+  link.setAttribute("aria-label", count ? `Shopping Cart, ${count} ${count === 1 ? "item" : "items"}` : "Shopping Cart");
+}
+
 function render() {
-  cartCount.textContent = String(itemCount());
+  updateCartBadge();
   const { page, productId } = currentRoute();
   if (page === "product-details") renderProductDetails(productId);
   else if (page === "shopping-cart") renderShoppingCart();
@@ -280,23 +314,22 @@ function setQuantity(input, quantity, minimum = 1) {
 
 function addToCart(productId, quantity) {
   if (!Number.isInteger(quantity) || quantity < 1) {
-    notice = "Choose a quantity of at least 1.";
-    render();
+    showToast("Choose a quantity of at least 1.", "error");
     return;
   }
   const product = products.find((item) => item.id === productId);
   if (!product) return;
   cart.set(productId, (cart.get(productId) || 0) + quantity);
-  orderCompleted = false;
-  notice = `${product.name} added to your cart.`;
+  lastOrder = null;
   render();
+  showToast(`${product.name} added to your cart.`);
 }
 
 function updateCartQuantity(productId, quantity) {
   if (!Number.isInteger(quantity) || quantity < 0) return false;
   if (quantity === 0) cart.delete(productId);
   else cart.set(productId, quantity);
-  orderCompleted = false;
+  lastOrder = null;
   return true;
 }
 
@@ -332,16 +365,21 @@ document.addEventListener("click", (event) => {
   } else if (action === "remove") {
     const product = products.find((item) => item.id === productId);
     cart.delete(productId);
-    orderCompleted = false;
-    notice = product ? `${product.name} removed from your cart.` : "";
+    lastOrder = null;
     render();
+    if (product) showToast(`${product.name} removed from your cart.`, "info");
   } else if (action === "process-order") {
     if (cart.size) {
+      orderSequence += 1;
+      lastOrder = {
+        id: `FS-${orderSequence}`,
+        totalCents: totalCents(),
+        items: [...cart.entries()].map(([id, quantity]) => ({ ...products.find((item) => item.id === id), quantity })),
+      };
       cart.clear();
-      notice = "";
-      orderCompleted = true;
       render();
       main.focus();
+      showToast(`Order ${lastOrder.id} placed. Thank you!`);
     }
   }
 });
@@ -360,8 +398,8 @@ document.addEventListener("change", (event) => {
     const productId = input.dataset.cartQuantity;
     const quantity = input.valueAsNumber;
     if (updateCartQuantity(productId, quantity)) {
-      notice = quantity === 0 ? "Item removed from your cart." : "";
       render();
+      if (quantity === 0) showToast("Item removed from your cart.", "info");
     } else {
       input.value = String(cart.get(productId) || 1);
     }
@@ -369,7 +407,7 @@ document.addEventListener("change", (event) => {
 });
 
 window.addEventListener("hashchange", () => {
-  notice = "";
+  if (currentRoute().page !== "checkout") lastOrder = null;
   render();
 });
 

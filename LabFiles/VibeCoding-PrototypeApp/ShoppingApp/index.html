@@ -29,7 +29,8 @@
           <a class="nav-link" href="#/shopping-cart" aria-label="Shopping Cart" data-page="shopping-cart">
             <span class="nav-emoji" aria-hidden="true">🛒</span>
             <span class="nav-short" aria-hidden="true">C</span>
-            <span class="nav-full">Shopping Cart <span class="cart-count" id="cart-count">0</span></span>
+            <span class="nav-full">Shopping Cart</span>
+            <span class="cart-count" id="cart-count" aria-hidden="true" hidden>0</span>
           </a>
           <a class="nav-link" href="#/checkout" aria-label="Checkout" data-page="checkout">
             <span class="nav-emoji" aria-hidden="true">💳</span>
@@ -42,6 +43,7 @@
       <main class="main-content" id="main-content" tabindex="-1">
         <noscript>This prototype needs JavaScript enabled to display the shop.</noscript>
       </main>
+      <div class="toast-region" id="toast-region" aria-live="polite"></div>
     </div>
   </body>
 </html>

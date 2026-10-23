@@ -43,7 +43,8 @@ Online shoppers interested in browsing and ordering fruit.
 - Show details for a selected product.
 - Let shoppers review cart contents, update quantities, and remove products.
 - Show an order summary and total at checkout.
-- Simulate processing an order without collecting payment information.
+- Simulate processing an order without collecting payment information, then show a thank-you confirmation with an order summary.
+- Show a cart item-count badge in the navigation.
 
 ## 5. Pages and Expected Behavior
 
@@ -52,7 +53,7 @@ Online shoppers interested in browsing and ordering fruit.
 - Display all 10 products with their emoji, name, and price per unit.
 - Provide a quantity control and an **Add to Cart** action for each product.
 - Allow shoppers to select a product to open its ProductDetails page.
-- Show clear feedback when a product is added to the cart.
+- Show clear feedback when a product is added to the cart, using an in-app toast notification (see Notifications in section 9).
 
 ### ProductDetails
 
@@ -74,6 +75,7 @@ Online shoppers interested in browsing and ordering fruit.
 - Provide a **Process Order** action when the cart contains items.
 - Simulate a successful order locally; do not make a payment or contact a service.
 - Show an empty-cart message and a way back to Products if there are no items.
+- After **Process Order**, replace the order summary with a confirmation view: a thank-you message, a sample order number (for example, FS-1001), the ordered items with quantities and line totals, the order total, a note that no payment was taken, and a **Continue Shopping** link to Products. Also show a toast notification confirming the order. Show the confirmation view only until the shopper leaves Checkout or changes the cart.
 
 ## 6. Navigation
 
@@ -82,6 +84,8 @@ Provide a left-side navigation menu with links to **Products**, **ProductDetails
 At viewport widths below 600 CSS pixels, collapse the navigation labels to one- or two-letter abbreviations (for example, P, D, C, and O), keeping the compact navigation vertically stacked in its left-side position. Keep every link operable and provide accessible names so the abbreviated controls remain understandable to assistive technology.
 
 Display an emoji for each page in the navigation menu: 🍎 Products, 🔍 ProductDetails, 🛒 ShoppingCart, and 💳 Checkout. The emoji appear beside the page names when the navigation is expanded. When the navigation is collapsed, each emoji must be centered horizontally within the navigation bar, with its abbreviation centered beneath it. Mark the emoji as decorative so assistive technology uses the page name instead.
+
+Show a cart badge on the Shopping Cart navigation item that displays the total number of items in the cart (the sum of all quantities; display "99+" above 99). Position the badge on the 🛒 emoji so it is visible in both the expanded and collapsed navigation, hide it when the cart is empty, and update it immediately whenever the cart changes. Include the count in the link's accessible name (for example, "Shopping Cart, 3 items").
 
 ## 7. Sample Data
 
@@ -106,7 +110,8 @@ Use this sample catalog. Prices are illustrative and in USD.
 2. **Add items to the cart:** A shopper selects a quantity and adds a product. The cart shows the correct product and quantity. Adding the same product again increases its existing cart quantity.
 3. **Update or remove cart items:** A shopper changes an item's quantity or removes it. The displayed line total and cart total update accordingly. A quantity of zero removes the item; invalid or negative quantities are not accepted.
 4. **Review checkout:** A shopper proceeds to Checkout and sees the same items, quantities, and total as in the cart.
-5. **Simulate an order:** Selecting **Process Order** displays an order confirmation, clears the cart, and does not request payment details.
+5. **Simulate an order:** Selecting **Process Order** displays a thank-you confirmation with an order number, the ordered items, and the total; shows a confirmation toast; clears the cart (the nav badge disappears); and does not request payment details.
+7. **See notifications and the cart count:** Adding, removing, or invalidly changing cart items shows a non-blocking toast, and the nav cart badge always shows the current item count, including when the navigation is collapsed.
 6. **Navigate between pages:** The navigation menu takes the shopper to each page. Selecting a product opens its details, and the navigation labels collapse to abbreviations below 600 CSS pixels.
 
 ## 9. Technical Requirements
@@ -117,6 +122,7 @@ Use this sample catalog. Prices are illustrative and in USD.
 - Keep cart state while navigating between pages. Persistence after a browser refresh is not required.
 - Use stable product IDs to associate selected products and cart entries with catalog data.
 - Format prices consistently in USD and calculate line totals and the order total from product price and quantity. Round displayed monetary amounts to two decimal places.
+- Notifications: do not use `alert()`, `confirm()`, or `prompt()`. Show feedback (item added, item removed, invalid quantity, order placed) as in-app toasts in a fixed container at the bottom right. Toasts must not block interaction, dismiss automatically after about 4 seconds, include a close button, show at most 3 at a time, and be announced to assistive technology (`role="status"`, or `role="alert"` for errors).
 - Do not require external services or API keys. Use emoji as the product visuals.
 
 ## 10. Visual and Responsive Requirements
@@ -130,7 +136,7 @@ Use this sample catalog. Prices are illustrative and in USD.
 ## 11. Prototype Assumptions
 
 - Product prices and descriptions are sample content, not live inventory or pricing.
-- **Process Order** simulates success only. On confirmation, the cart is cleared; no real order or payment is created.
+- **Process Order** simulates success only. On confirmation, the cart is cleared and the order number is a sequential sample value (for example, FS-1001); no real order or payment is created.
 - Cart contents only need to remain available while navigating within the open app.
 - Product images are represented by emoji and do not require downloaded image assets.
 
@@ -150,10 +156,8 @@ Expanded (viewport width >= 600 CSS pixels)
 |                          |
 | [🍎 Products]            |
 | [🔍 Product Details]     |
-| [🛒 Shopping Cart]       |
+| [🛒 Shopping Cart (3)]   |
 | [💳 Checkout]            |
-|                          |
-| Cart items: 0            |
 +--------------------------+
 | Main page content        |
 +--------------------------+
@@ -166,7 +170,7 @@ Collapsed (viewport width < 600 CSS pixels)
 | P  |                     |
 | 🔍 |                     |
 | D  |                     |
-| 🛒 |                     |
+| 🛒³|                     |
 | C  |                     |
 | 💳 |                     |
 | O  |                     |
@@ -178,6 +182,13 @@ Notes:
   🛒 Shopping Cart, and 💳 Checkout.
 - When collapsed, each emoji is centered horizontally in the navigation bar,
   with its one-letter abbreviation centered beneath it.
+- A cart badge on the Shopping Cart link shows the total number of items in
+  the cart (the sum of all quantities, shown as 99+ above 99). It appears on
+  the 🛒 emoji in both expanded and collapsed layouts, is hidden when the cart
+  is empty, and updates immediately when the cart changes. The ³ above only
+  suggests the badge; it is a small circle at the top-right of the emoji.
+- The Shopping Cart link's accessible name includes the count, for example
+  "Shopping Cart, 3 items".
 - Collapsed links have accessible names matching their full page names.
 - Highlight the link for the current page.
 - FS is the compact app mark; P, D, C, and O abbreviate the page names.
@@ -297,12 +308,18 @@ CHECKOUT PAGE WIREFRAME
 Confirmation state:
 +---------------------+------------------------------------------+
 | Fruit Shop          | Order Complete                          |
-|                     | Your sample order has been processed.   |
-| [Products]          | No payment was taken.                   |
-| [Product Details]   | [Continue Shopping]                     |
-| [Shopping Cart (0)] |                                          |
-| [Checkout]          |                                          |
-+---------------------+------------------------------------------+
+|                     | ✅ Thank you for your order!            |
+| [Products]          | Order number: FS-1001                   |
+| [Product Details]   | No payment was taken.                   |
+| [Shopping Cart]     | 🍎 Apples     2 x $1.20         $2.40    |
+| [Checkout]          | 🍌 Bananas    1 x $0.60         $0.60    |
+|                     | Order total:                    $3.00    |
+|                     | [Continue Shopping]                     |
+|                     |        +---------------------------------+ |
+|                     |        | Order FS-1001 placed. Thank you!| |
++---------------------+--------+---------------------------------+-+
+(The cart badge is hidden because the cart is now empty. The toast at the
+bottom right fades out automatically.)
 
 Empty cart state:
 - Show that there are no items to check out.
@@ -311,4 +328,9 @@ Empty cart state:
 Notes:
 - Checkout is a local simulation, not a payment form.
 - Processing confirms the simulated order and clears the cart.
+- The confirmation view shows a thank-you message, a sample order number,
+  the ordered items with quantities and line totals, and the order total, so
+  the summary remains visible after the cart is cleared.
+- The confirmation view is shown only until the shopper leaves Checkout or
+  changes the cart.
 ```

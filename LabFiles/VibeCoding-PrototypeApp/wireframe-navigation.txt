@@ -9,10 +9,8 @@ Expanded (viewport width >= 600 CSS pixels)
 |                          |
 | [🍎 Products]            |
 | [🔍 Product Details]     |
-| [🛒 Shopping Cart]       |
+| [🛒 Shopping Cart (3)]   |
 | [💳 Checkout]            |
-|                          |
-| Cart items: 0            |
 +--------------------------+
 | Main page content        |
 +--------------------------+
@@ -25,7 +23,7 @@ Collapsed (viewport width < 600 CSS pixels)
 | P  |                     |
 | 🔍 |                     |
 | D  |                     |
-| 🛒 |                     |
+| 🛒³|                     |
 | C  |                     |
 | 💳 |                     |
 | O  |                     |
@@ -37,6 +35,13 @@ Notes:
   🛒 Shopping Cart, and 💳 Checkout.
 - When collapsed, each emoji is centered horizontally in the navigation bar,
   with its one-letter abbreviation centered beneath it.
+- A cart badge on the Shopping Cart link shows the total number of items in
+  the cart (the sum of all quantities, shown as 99+ above 99). It appears on
+  the 🛒 emoji in both expanded and collapsed layouts, is hidden when the cart
+  is empty, and updates immediately when the cart changes. The ³ above only
+  suggests the badge; it is a small circle at the top-right of the emoji.
+- The Shopping Cart link's accessible name includes the count, for example
+  "Shopping Cart, 3 items".
 - Collapsed links have accessible names matching their full page names.
 - Highlight the link for the current page.
 - FS is the compact app mark; P, D, C, and O abbreviate the page names.

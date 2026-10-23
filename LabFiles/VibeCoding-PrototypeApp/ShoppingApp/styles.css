@@ -119,17 +119,31 @@ a {
   font-weight: 800;
 }
 
+.nav-link {
+  position: relative;
+}
+
 .cart-count {
-  display: inline-grid;
-  min-width: 23px;
-  height: 23px;
-  margin-left: 4px;
-  padding: 0 6px;
+  position: absolute;
+  top: 5px;
+  left: 30px;
+  display: grid;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
   place-items: center;
   border-radius: 999px;
-  color: var(--green-dark);
-  background: #d9ead8;
-  font-size: 0.75rem;
+  color: #fff;
+  background: #d6402c;
+  box-shadow: 0 0 0 2px #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.cart-count[hidden] {
+  display: none;
 }
 
 .sidebar-note {
@@ -339,13 +353,74 @@ input[type="number"]::-webkit-outer-spin-button {
   background: #ffe5dc;
 }
 
-.notice {
-  margin-bottom: 22px;
-  padding: 12px 15px;
+.toast-region {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+  display: grid;
+  gap: 10px;
+  width: min(360px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
   border: 1px solid #c9dfc9;
   border-radius: 12px;
   color: var(--green-dark);
   background: #eff7ec;
+  box-shadow: 0 8px 24px rgba(30, 50, 35, 0.18);
+  pointer-events: auto;
+  animation: toast-in 200ms ease-out;
+}
+
+.toast-info {
+  border-color: #d8dcc8;
+  color: #46503f;
+  background: #f6f7ec;
+}
+
+.toast-error {
+  border-color: #efc1b5;
+  color: #8a2a18;
+  background: #fff0eb;
+}
+
+.toast-close {
+  flex: 0 0 auto;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.order-number {
+  margin-bottom: 8px;
+}
+
+.confirmation-list {
+  max-width: 460px;
+  margin: 18px auto 0;
+  text-align: left;
+}
+
+.confirmation .checkout-total {
+  max-width: 460px;
+  margin: 0 auto 18px;
 }
 
 .panel {
@@ -630,6 +705,18 @@ input:focus-visible {
 
   .nav-full {
     display: none;
+  }
+
+  .cart-count {
+    top: 3px;
+    right: 3px;
+    left: auto;
+  }
+
+  .toast-region {
+    right: 8px;
+    bottom: 8px;
+    width: calc(100vw - 76px);
   }
 
   .nav-short {
